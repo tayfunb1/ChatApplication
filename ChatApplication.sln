@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApplication.Api", "ChatApplication.Api\ChatApplication.Api.csproj", "{F1C8DFB5-CBED-4EE4-8213-558B21BB3FFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApplication.Business", "ChatApplication.Business\ChatApplication.Business.csproj", "{DB9C0369-81AC-4210-BFB2-024848FDBBF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApplication.Tests", "ChatApplication.Tests\ChatApplication.Tests.csproj", "{B5F46E25-139B-485B-87AF-1982CBD0BC80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1C8DFB5-CBED-4EE4-8213-558B21BB3FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1C8DFB5-CBED-4EE4-8213-558B21BB3FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1C8DFB5-CBED-4EE4-8213-558B21BB3FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1C8DFB5-CBED-4EE4-8213-558B21BB3FFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB9C0369-81AC-4210-BFB2-024848FDBBF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB9C0369-81AC-4210-BFB2-024848FDBBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB9C0369-81AC-4210-BFB2-024848FDBBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB9C0369-81AC-4210-BFB2-024848FDBBF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F46E25-139B-485B-87AF-1982CBD0BC80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F46E25-139B-485B-87AF-1982CBD0BC80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F46E25-139B-485B-87AF-1982CBD0BC80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F46E25-139B-485B-87AF-1982CBD0BC80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
