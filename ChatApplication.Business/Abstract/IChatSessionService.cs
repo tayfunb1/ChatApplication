@@ -1,4 +1,4 @@
-﻿using ChatApplication.Business.Models.DTOs.Common;
+﻿using ChatApplication.Business.Models.Common;
 using ChatApplication.Business.Models.DTOs.Response;
 
 namespace ChatApplication.Business.Abstract;

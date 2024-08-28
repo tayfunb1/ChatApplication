@@ -1,4 +1,4 @@
-﻿using ChatApplication.Business.Models.DTOs.Common;
+﻿using ChatApplication.Business.Models.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChatApplication.Controllers;

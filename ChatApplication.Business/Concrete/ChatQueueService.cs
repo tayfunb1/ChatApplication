@@ -1,6 +1,6 @@
 ﻿using ChatApplication.Business.Abstract;
+using ChatApplication.Business.Models.Common;
 using ChatApplication.Business.Models.DataAccess.Entities;
-using ChatApplication.Business.Models.DTOs.Common;
 using ChatApplication.Business.Models.DTOs.Response;
 using ChatApplication.Business.Utility;
 

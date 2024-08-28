@@ -1,4 +1,4 @@
-﻿namespace ChatApplication.Business.Models.DTOs.Common;
+﻿namespace ChatApplication.Business.Models.Common;
 
 public class BaseResponse
 {

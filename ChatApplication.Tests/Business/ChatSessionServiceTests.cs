@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using ChatApplication.Business.Abstract;
 using ChatApplication.Business.Concrete;
+using ChatApplication.Business.Models.Common;
 using ChatApplication.Business.Models.DataAccess.Entities;
 using ChatApplication.Business.Models.DataAccess.Entities.Enums;
-using ChatApplication.Business.Models.DTOs.Common;
 using FluentAssertions;
 using Moq;
 using Xunit;
