@@ -25,7 +25,7 @@ public class ChatSessionService(IChatQueueService chatQueueService, ITeamService
             {
                 Data = new ChatSessionResponse(),
                 Success = false,
-                ResponseCode = ResponseCodes.BadRequest,
+                ResponseCode = ResponseCodes.InternalServerError,
                 Message = "There are no available teams at the moment"
             };
         }
@@ -48,7 +48,7 @@ public class ChatSessionService(IChatQueueService chatQueueService, ITeamService
             {
                 Data = new ChatSessionResponse(),
                 Success = false,
-                ResponseCode = ResponseCodes.BadRequest,
+                ResponseCode = ResponseCodes.ServiceUnavailable,
                 Message = "No agents available at the moment, please try again later"
             };
     }
