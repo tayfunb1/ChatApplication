@@ -1,4 +1,4 @@
-﻿namespace ChatApplication.Business.Models.DataAccess.Entities.Enums;
+﻿namespace ChatApplication.DataAccess.Entities.Enums;
 
 public enum AgentType
 {

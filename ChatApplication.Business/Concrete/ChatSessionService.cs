@@ -1,16 +1,17 @@
 ﻿using System.Collections.Concurrent;
 using ChatApplication.Business.Abstract;
 using ChatApplication.Business.Models.Common;
-using ChatApplication.Business.Models.DataAccess.Entities;
 using ChatApplication.Business.Models.DTOs.Response;
+using ChatApplication.DataAccess.Abstract;
+using ChatApplication.DataAccess.Entities;
 
 namespace ChatApplication.Business.Concrete;
 
-public class ChatSessionService(IChatQueueService chatQueueService, ITeamService teamService, 
+public class ChatSessionService(IChatQueueManager chatQueueManager, ITeamService teamService, 
     ConcurrentDictionary<Guid, ChatSession> assignedChatSessions)
     : IChatSessionService
 {
-    public async Task<BaseApiResponse<ChatSessionResponse>> StartChatSessionAsync(int shiftId)
+    public async Task<BaseApiResponse<ChatSessionResponseDto>> StartChatSessionAsync(int shiftId)
     {
         var chatSession = new ChatSession
         {
@@ -21,7 +22,7 @@ public class ChatSessionService(IChatQueueService chatQueueService, ITeamService
         var activeTeam = teamService.GetActiveTeam(shiftId);
         if (activeTeam == null)
         {
-            return new BaseApiResponse<ChatSessionResponse>
+            return new BaseApiResponse<ChatSessionResponseDto>
             {
                 Data = null,
                 Success = false,
@@ -30,12 +31,12 @@ public class ChatSessionService(IChatQueueService chatQueueService, ITeamService
             };
         }
 
-        var isChatQueued = await chatQueueService.QueueChatSession(chatSession, activeTeam);
+        var isChatQueued = await chatQueueManager.QueueChatSession(chatSession, activeTeam);
 
         return isChatQueued
-            ? new BaseApiResponse<ChatSessionResponse>
+            ? new BaseApiResponse<ChatSessionResponseDto>
             {
-                Data = new ChatSessionResponse
+                Data = new ChatSessionResponseDto
                 {
                     Id = chatSession.Id,
                     CreatedAt = chatSession.CreatedAt
@@ -44,20 +45,20 @@ public class ChatSessionService(IChatQueueService chatQueueService, ITeamService
                 ResponseCode = ResponseCodes.Ok,
                 Message = "Chat session is queued successfully"
             }
-            : new BaseApiResponse<ChatSessionResponse>
+            : new BaseApiResponse<ChatSessionResponseDto>
             {
-                Data = new ChatSessionResponse(),
+                Data = new ChatSessionResponseDto(),
                 Success = false,
                 ResponseCode = ResponseCodes.ServiceUnavailable,
                 Message = "No agents available at the moment, please try again later"
             };
     }
 
-    public Task<BaseApiListResponse<GetQueueDataResponse>> DisplayAssignedChatSessions()
+    public Task<BaseApiListResponse<GetQueueDataResponseDto>> DisplayAssignedChatSessions()
     {
-        var result = new BaseApiListResponse<GetQueueDataResponse>
+        var result = new BaseApiListResponse<GetQueueDataResponseDto>
         {
-            DataList = assignedChatSessions.Select(x => new GetQueueDataResponse
+            DataList = assignedChatSessions.Select(x => new GetQueueDataResponseDto
             {
                 Id = x.Key,
                 CreatedAt = x.Value.CreatedAt,

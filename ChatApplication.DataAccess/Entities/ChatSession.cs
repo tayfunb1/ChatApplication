@@ -1,4 +1,4 @@
-﻿namespace ChatApplication.Business.Models.DataAccess.Entities;
+﻿namespace ChatApplication.DataAccess.Entities;
 
 public class ChatSession
 {

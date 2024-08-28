@@ -24,4 +24,8 @@
       <Folder Include="Models\DTOs\Request\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ChatApplication.DataAccess\ChatApplication.DataAccess.csproj" />
+    </ItemGroup>
+
 </Project>

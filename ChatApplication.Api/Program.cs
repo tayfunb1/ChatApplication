@@ -3,10 +3,14 @@ using System.Reflection;
 using ChatApplication.Business.Abstract;
 using ChatApplication.Business.BackgroundJobs;
 using ChatApplication.Business.Concrete;
-using ChatApplication.Business.Models.DataAccess.Entities;
-using ChatApplication.Business.Models.DataAccess.Entities.Enums;
+using ChatApplication.DataAccess.Abstract;
+using ChatApplication.DataAccess.Concrete;
+using ChatApplication.DataAccess.Entities;
+using ChatApplication.DataAccess.Entities.Enums;
 using ChatApplication.Middlewares;
 using Newtonsoft.Json;
+using ChatSession = ChatApplication.DataAccess.Entities.ChatSession;
+using Team = ChatApplication.DataAccess.Entities.Team;
 
 namespace ChatApplication;
 
@@ -23,7 +27,8 @@ public class Program
             .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
         
-        builder.Services.AddSingleton<IChatQueueService, ChatQueueService>();
+        builder.Services.AddSingleton<IChatQueueManager, ChatQueueManager>();
+        builder.Services.AddScoped<IChatQueueService, ChatQueueService>();
         builder.Services.AddSingleton<ITeamService>(_ => new TeamService(SetInitialTeams().Teams, SetInitialTeams().OverflowTeam));
         builder.Services.AddScoped<IChatSessionService, ChatSessionService>();
         
@@ -63,7 +68,7 @@ public class Program
         app.Run();
     }
 
-    private static (List<Team> Teams, OverflowTeam OverflowTeam) SetInitialTeams()
+    private static (List<Team> Teams, DataAccess.Entities.OverflowTeam OverflowTeam) SetInitialTeams()
     {
         var teams = new List<Team>
         {

@@ -1,4 +1,4 @@
-﻿using ChatApplication.Business.Models.DataAccess.Entities;
+﻿using ChatApplication.DataAccess.Entities;
 
 namespace ChatApplication.Business.Abstract;
 

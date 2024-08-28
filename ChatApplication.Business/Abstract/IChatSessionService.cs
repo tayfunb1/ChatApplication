@@ -5,6 +5,6 @@ namespace ChatApplication.Business.Abstract;
 
 public interface IChatSessionService
 {
-    Task<BaseApiResponse<ChatSessionResponse>> StartChatSessionAsync(int shiftId);
-    Task<BaseApiListResponse<GetQueueDataResponse>> DisplayAssignedChatSessions();
+    Task<BaseApiResponse<ChatSessionResponseDto>> StartChatSessionAsync(int shiftId);
+    Task<BaseApiListResponse<GetQueueDataResponseDto>> DisplayAssignedChatSessions();
 }

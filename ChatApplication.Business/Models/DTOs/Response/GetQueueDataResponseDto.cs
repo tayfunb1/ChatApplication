@@ -1,6 +1,6 @@
 ﻿namespace ChatApplication.Business.Models.DTOs.Response;
 
-public class GetQueueDataResponse : ChatSessionResponse
+public class GetQueueDataResponseDto : ChatSessionResponseDto
 {
     public bool IsActive { get; set; }
     public int PollCount { get; set; }

@@ -1,6 +1,6 @@
-﻿using ChatApplication.Business.Models.DataAccess.Entities.Enums;
+﻿using ChatApplication.DataAccess.Entities.Enums;
 
-namespace ChatApplication.Business.Models.DataAccess.Entities;
+namespace ChatApplication.DataAccess.Entities;
 
 public class Team
 {

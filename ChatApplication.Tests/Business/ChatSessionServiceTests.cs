@@ -2,8 +2,9 @@
 using ChatApplication.Business.Abstract;
 using ChatApplication.Business.Concrete;
 using ChatApplication.Business.Models.Common;
-using ChatApplication.Business.Models.DataAccess.Entities;
-using ChatApplication.Business.Models.DataAccess.Entities.Enums;
+using ChatApplication.DataAccess.Abstract;
+using ChatApplication.DataAccess.Entities;
+using ChatApplication.DataAccess.Entities.Enums;
 using FluentAssertions;
 using Moq;
 using Xunit;
@@ -12,14 +13,14 @@ namespace ChatApplication.Tests.Business;
 
 public class ChatSessionServiceTests
 {
-    private readonly Mock<IChatQueueService> _mockChatQueueService;
+    private readonly Mock<IChatQueueManager> _mockChatQueueService;
     private readonly Mock<ITeamService> _mockTeamService;
     private readonly ConcurrentDictionary<Guid, ChatSession> _assignedChatSessions;
     private readonly ChatSessionService _service;
 
     public ChatSessionServiceTests()
     {
-        _mockChatQueueService = new Mock<IChatQueueService>();
+        _mockChatQueueService = new Mock<IChatQueueManager>();
         _mockTeamService = new Mock<ITeamService>();
         _assignedChatSessions = new ConcurrentDictionary<Guid, ChatSession>();
         _service = new ChatSessionService(_mockChatQueueService.Object, _mockTeamService.Object, _assignedChatSessions);
@@ -68,8 +69,8 @@ public class ChatSessionServiceTests
         // Assert
         result.Should().NotBeNull();
         result.Success.Should().BeFalse();
-        result.ResponseCode.Should().Be(ResponseCodes.BadRequest);
-        result.Message.Should().Be("There are no available teams at the moment");
+        result.ResponseCode.Should().Be(ResponseCodes.InternalServerError);
+        result.Message.Should().Be("An error occured during team selection");
     }
     
     [Fact]
@@ -96,7 +97,7 @@ public class ChatSessionServiceTests
         // Assert
         result.Should().NotBeNull();
         result.Success.Should().BeFalse();
-        result.ResponseCode.Should().Be(ResponseCodes.BadRequest);
+        result.ResponseCode.Should().Be(ResponseCodes.ServiceUnavailable);
         result.Message.Should().Be("No agents available at the moment, please try again later");
     }
     

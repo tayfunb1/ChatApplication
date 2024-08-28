@@ -1,11 +1,11 @@
-﻿using ChatApplication.Business.Abstract;
-using ChatApplication.Business.Models.Common;
-using ChatApplication.Business.Models.DataAccess.Entities;
+﻿using ChatApplication.Business.Models.Common;
+using ChatApplication.DataAccess.Abstract;
+using ChatApplication.DataAccess.Entities;
 using Newtonsoft.Json;
 
 namespace ChatApplication.Business.BackgroundJobs;
 
-public class PollSimulationJob(IChatQueueService chatQueueService, HttpClient httpClient) : Microsoft.Extensions.Hosting.BackgroundService
+public class PollSimulationJob(IChatQueueManager chatQueueManager, HttpClient httpClient) : Microsoft.Extensions.Hosting.BackgroundService
 {
     private const string ApiUrl = "http://localhost:5220/api/Chat/poll";
 
@@ -13,9 +13,9 @@ public class PollSimulationJob(IChatQueueService chatQueueService, HttpClient ht
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            var chatsInQueue = await chatQueueService.DisplayQueueData();
+            var chatsInQueue = await chatQueueManager.DisplayQueueData();
             var chatsToBePolled = 
-                chatsInQueue.DataList.Where(x => x.IsToBePolled).ToList();
+                chatsInQueue.Where(x => x.IsToBePolled).ToList();
             if (chatsToBePolled.Count > 0)
             {
                 // "Once the chat window receives OK as a response it will start polling every 1s"

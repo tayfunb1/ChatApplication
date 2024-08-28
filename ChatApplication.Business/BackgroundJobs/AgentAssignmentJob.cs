@@ -1,10 +1,10 @@
 ﻿using System.Collections.Concurrent;
-using ChatApplication.Business.Abstract;
-using ChatApplication.Business.Models.DataAccess.Entities;
+using ChatApplication.DataAccess.Abstract;
+using ChatApplication.DataAccess.Entities;
 
 namespace ChatApplication.Business.BackgroundJobs;
 
-public class AgentAssignmentJob(IChatQueueService chatQueueService, 
+public class AgentAssignmentJob(IChatQueueManager chatQueueManager, 
     ConcurrentDictionary<Guid, ChatSession> assignedChatSessions) : Microsoft.Extensions.Hosting.BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -12,7 +12,7 @@ public class AgentAssignmentJob(IChatQueueService chatQueueService,
         Func<ChatSession, bool> condition = session => session.IsActive && session.PollCount == 3;
         while (!stoppingToken.IsCancellationRequested)
         {
-            var chatSession = await chatQueueService.DequeueChatSessionWithCondition(condition);
+            var chatSession = await chatQueueManager.DequeueChatSessionWithCondition(condition);
             
             if (chatSession is not null && chatSession.IsActive && chatSession.PollCount == 3)
             {

@@ -1,13 +1,11 @@
 ﻿using ChatApplication.Business.Models.Common;
-using ChatApplication.Business.Models.DataAccess.Entities;
 using ChatApplication.Business.Models.DTOs.Response;
+using ChatApplication.DataAccess.Entities;
 
 namespace ChatApplication.Business.Abstract;
 
 public interface IChatQueueService
 {
-    Task<bool> QueueChatSession(ChatSession session, Team activeTeam);
-    Task<ChatSession> DequeueChatSessionWithCondition(Func<ChatSession, bool> condition);
-    Task<BaseApiListResponse<GetQueueDataResponse>> DisplayQueueData();
+    Task<BaseApiListResponse<GetQueueDataResponseDto>> DisplayQueueData();
     Task<BaseApiResponse<ChatSession>> PollChatSession(Guid chatSessionId);
 }

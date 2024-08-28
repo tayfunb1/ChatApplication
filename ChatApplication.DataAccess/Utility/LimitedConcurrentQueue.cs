@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace ChatApplication.Business.Utility;
+namespace ChatApplication.DataAccess.Utility;
 
 public class LimitedConcurrentQueue<T>
 {
