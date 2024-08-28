@@ -23,10 +23,10 @@ public class ChatSessionService(IChatQueueService chatQueueService, ITeamService
         {
             return new BaseApiResponse<ChatSessionResponse>
             {
-                Data = new ChatSessionResponse(),
+                Data = null,
                 Success = false,
                 ResponseCode = ResponseCodes.InternalServerError,
-                Message = "There are no available teams at the moment"
+                Message = "An error occured during team selection"
             };
         }
 
